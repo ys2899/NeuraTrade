@@ -135,8 +135,8 @@ Location: `results/{TICKER}_backtest_{START}_{END}.png`
 Create your own trading script:
 
 ```python
-from neuratrade import TradingAgent, DataFetcher
-from neuratrade.agent import TradingEnvironment
+# Import main components
+from neuratrade import TradingAgent, TradingEnvironment, DataFetcher
 from neuratrade.config import Config
 
 # Customize configuration
@@ -196,12 +196,19 @@ crossover_signal = (sma_20 > sma_50) & (sma_20.shift(1) <= sma_50.shift(1))
 
 ```python
 from neuratrade import TradingAgent
+import os
 
 # Create agent
 agent = TradingAgent()
 
-# Load weights
-agent.load('models/AAPL_trading_agent.h5')
+# Load weights with error handling
+model_path = 'models/AAPL_trading_agent.h5'
+if os.path.exists(model_path):
+    agent.load(model_path)
+    print(f"Model loaded successfully from {model_path}")
+else:
+    print(f"Warning: Model file not found at {model_path}")
+    print("Agent will use random initialization")
 
 # Use for prediction
 state = env.reset()

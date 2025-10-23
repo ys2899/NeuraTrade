@@ -8,8 +8,7 @@ import os
 # Add parent directory to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from neuratrade import TradingAgent, DataFetcher
-from neuratrade.agent import TradingEnvironment
+from neuratrade import TradingAgent, TradingEnvironment, DataFetcher
 from neuratrade.config import Config
 import matplotlib.pyplot as plt
 import pandas as pd
